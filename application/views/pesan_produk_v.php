@@ -15,6 +15,28 @@
     <?php $this->load->view('partials/navbar.php') ?>
 
     <!-- konten -->
+    <!-- generate id sales order -->
+    <?php
+    $hitung = 0;
+    $jumlahIdSama = 0;
+    $date = date('Ymd');
+    foreach ($sales_order->result() as $row) :
+        $hitung++;
+        if (strpos($row->id_so, $date) !== false) {
+            $jumlahIdSama++;
+        }
+    endforeach;
+    $id_so = $date . ($jumlahIdSama + 1);
+    foreach ($sales_order->result() as $row) :
+        $sama = 0;
+        if ($id_so == $row->id_so) {
+            $sama++;
+        }
+    endforeach;
+    $id_so = $date . ($jumlahIdSama + 1 + $sama);
+    ?>
+    <!-- end generate id sales order -->
+
     <div class="container">
         <div class="row">
             <div class="col s12">
@@ -22,30 +44,41 @@
             </div>
         </div>
         <div class="row">
-            <form class="col s12" action="" method="post">
+            <form class="col s12" action="pesan_produk/save_pesanan_customer" method="post">
                 <div class="row">
                     <div class="input-field col s12">
-                        <select>
-                            <option value="" disabled selected>Pilih produk</option>
-                            <?php 
-                            foreach($produk->result() as $p) :
+                        <input type="text" id="id_so" name="id_so" value="<?php echo $id_so; ?>" hidden>
+                        <?php
+                        foreach ($produk->result() as $p) :
                             ?>
-                            <option value="<?php echo $p->id_barang;?>"><?php echo $p->nama_barang; ?></option>
+                            <input type="number" id="harga_barang_<?php echo $p->id_barang; ?>" value="<?php echo $p->harga_barang; ?>" hidden>
+                        <?php endforeach; ?>
+                        <select id="select_produk" name="select_produk">
+                            <option value="" disabled selected>Pilih produk</option>
+                            <?php
+                            foreach ($produk->result() as $p) :
+                                ?>
+                                <option value="<?php echo $p->id_barang; ?>"><?php echo $p->nama_barang; ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <label>Pilih Produk</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="password" type="password" class="validate">
-                        <label for="password">Password</label>
+                        <input id="jumlah" name="jumlah" type="number" class="validate" value="">
+                        <label for="jumlah">Jumlah</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" type="number" class="validate">
-                        <label for="email">Jumlah</label>
+                        <input id="harga_satuan" name="harga_satuan" type="text" class="validate" readonly placeholder="-">
+                        <label for="harga_satuan">Harga Satuan</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="total_harga" name="total_harga" type="text" class="validate" readonly placeholder="-" value="0">
+                        <label for="total_harga">Total Harga</label>
                     </div>
                 </div>
                 <div class="row">

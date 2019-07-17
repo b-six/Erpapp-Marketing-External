@@ -13,6 +13,16 @@
 <body>
     <!-- navbar -->
     <?php $this->load->view('partials/navbar.php') ?>
+    <!-- login dahulu -->
+    <?php
+    if (isset($_GET['pesan'])) :
+        ?>
+        <div class="row center">
+            <div class="col s12">
+                <h6 class="red-text small-text">Anda harus login terlebih dahulu untuk memesan produk.</h6>
+            </div>
+        </div>
+    <?php endif; ?>
     <!-- carousel -->
     <div class="carousel">
         <a class="carousel-item" href="#one!"><img src="<?php echo base_url('assets/img/carousel-img1.jpg') ?>"></a>

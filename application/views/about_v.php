@@ -18,13 +18,23 @@
     <div class="container container-wide">
         <div class="row">
             <div class="col s12">
+                <br>
                 <h5 class="grey-text"> <b>Profil Perusahaan</b></h5>
             </div>
         </div>
         <div class="row">
             <div class="col s12">
                 <div class="col s6">
+                    <br>
                     <img src="<?php echo base_url('assets/img/profil-perusahaan-sosro.png') ?>" alt="">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <img width='500px' height='680px' src="<?php echo base_url('assets/img/profil-perusahaan-sosro2.jpg') ?>" alt="">
                 </div>
                 <div class="col s6 quote">
                     <blockquote>

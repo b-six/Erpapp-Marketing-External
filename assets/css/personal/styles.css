@@ -60,3 +60,7 @@
 .show-dp {
 	display: unset !important;
 }
+
+.avoid-clicks {
+	pointer-events: none !important;
+}
